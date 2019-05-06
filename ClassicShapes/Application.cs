@@ -27,13 +27,15 @@ namespace ClassicShapes
                 Console.WriteLine($"ToString(null): {shape2D.ToString(null)}");
                 Console.WriteLine($"is3D: {shape2D.Is3D}");
 
-                Console.WriteLine("Implementing Cuboid with length 4, width 8, height 10");
-                Cuboid shape3D = new Cuboid(4, 8, 10);
+                Console.WriteLine("Implementing Sphere with Diameter 4");
+                Sphere shape3D = new Sphere(4);
                 Console.WriteLine($"Length: {shape3D.Length}");
                 Console.WriteLine($"Width: {shape3D.Width}");
                 Console.WriteLine($"Height: {shape3D.Height}");
+                Console.WriteLine($"Diameter: {shape3D.Diameter}");
                 Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
                 Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
+                Console.WriteLine($"Volume: {shape3D.Volume}");
                 Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
                 Console.WriteLine($"ToString(): {shape3D.ToString()}");
                 Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");
@@ -44,8 +46,10 @@ namespace ClassicShapes
                 Console.WriteLine($"Length: {shape3D.Length}");
                 Console.WriteLine($"Width: {shape3D.Width}");
                 Console.WriteLine($"Height: {shape3D.Height}");
+                Console.WriteLine($"Diameter: {shape3D.Diameter}");
                 Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
                 Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
+                Console.WriteLine($"Volume: {shape3D.Volume}");
                 Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
                 Console.WriteLine($"ToString(): {shape3D.ToString()}");
                 Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");

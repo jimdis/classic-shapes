@@ -24,6 +24,11 @@ namespace ClassicShapes
                     throw new ArgumentOutOfRangeException("Height must be greater than zero.");
                 }
                 _height = value;
+                if (ShapeType == ShapeType.Sphere)
+                {
+                    _baseShape.Length = value;
+                    _baseShape.Width = value;
+                }
             }
         }
 
@@ -33,6 +38,11 @@ namespace ClassicShapes
             set
             {
                 _baseShape.Length = value;
+                if (ShapeType == ShapeType.Sphere)
+                {
+                    _baseShape.Width = value;
+                    Height = value;
+                }
             }
         }
 
@@ -52,6 +62,11 @@ namespace ClassicShapes
             set
             {
                 _baseShape.Width = value;
+                if (ShapeType == ShapeType.Sphere)
+                {
+                    _baseShape.Length = value;
+                    Height = value;
+                }
             }
         }
 
