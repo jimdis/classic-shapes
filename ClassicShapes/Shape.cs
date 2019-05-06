@@ -6,7 +6,7 @@ namespace ClassicShapes
     public abstract class Shape
     {
 
-        private protected Shape(ShapeType shapeType)
+        protected Shape(ShapeType shapeType)
         {
             ShapeType = shapeType;
         }
@@ -23,14 +23,7 @@ namespace ClassicShapes
                 else return false;
             }
         }
-        public ShapeType ShapeType
-        {
-            get => ShapeType;
-            set
-            {
-                ShapeType = value;
-            }
-        }
+        public ShapeType ShapeType { get; private set; }
 
         public abstract string ToString(string format);
     }

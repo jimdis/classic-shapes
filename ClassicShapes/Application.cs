@@ -15,7 +15,16 @@ namespace ClassicShapes
             try
             {
                 // LÄGG IN INPUT FÖR ATT SLUMPA!
-                Console.WriteLine("Hello World");
+                Console.WriteLine("Implementing Rectangle with length 2 & width 4");
+                Rectangle rect = new Rectangle(2, 4);
+                Console.WriteLine($"Length: {rect.Length}");
+                Console.WriteLine($"Width: {rect.Width}");
+                Console.WriteLine($"Area: {rect.Area}");
+                Console.WriteLine($"Perimeter: {rect.Perimeter}");
+                Console.WriteLine($"ToString(R): {rect.ToString("R")}");
+                Console.WriteLine($"ToString(): {rect.ToString()}");
+                Console.WriteLine($"ToString(empty): {rect.ToString("")}");
+                Console.WriteLine($"ToString(null): {rect.ToString(null)}");
             }
             catch (Exception ex)
             {

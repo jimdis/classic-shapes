@@ -6,14 +6,15 @@ namespace ClassicShapes
         private double _length;
         private double _width;
 
-        private protected Shape2D(ShapeType ShapeType, double length, double width)
+        protected Shape2D(ShapeType shapeType, double length, double width) : base(shapeType)
         {
-            //Todo
+            Length = length;
+            Width = width;
         }
 
-        public abstract double Area;
+        public abstract double Area { get; }
 
-        public abstract double Perimeter;
+        public abstract double Perimeter { get; }
 
         public double Length
         {
@@ -43,14 +44,14 @@ namespace ClassicShapes
             }
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return ToString("G");
         }
 
-        public string ToString(string format = "G")
+        public override string ToString(string format)
         {
-            if (format == "G")
+            if (format == "G" || String.IsNullOrEmpty(format))
             {
                 return "Formaterar med G";
             }
@@ -60,7 +61,7 @@ namespace ClassicShapes
             }
             else
             {
-                throw new FormatException("format argument not accepted.")
+                throw new FormatException("format argument not accepted.");
             }
         }
 
