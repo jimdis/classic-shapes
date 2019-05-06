@@ -16,15 +16,16 @@ namespace ClassicShapes
             {
                 // LÄGG IN INPUT FÖR ATT SLUMPA!
                 Console.WriteLine("Implementing Rectangle with length 2 & width 4");
-                Rectangle rect = new Rectangle(2, 4);
-                Console.WriteLine($"Length: {rect.Length}");
-                Console.WriteLine($"Width: {rect.Width}");
-                Console.WriteLine($"Area: {rect.Area}");
-                Console.WriteLine($"Perimeter: {rect.Perimeter}");
-                Console.WriteLine($"ToString(R): {rect.ToString("R")}");
-                Console.WriteLine($"ToString(): {rect.ToString()}");
-                Console.WriteLine($"ToString(empty): {rect.ToString("")}");
-                Console.WriteLine($"ToString(null): {rect.ToString(null)}");
+                Ellipse shape = new Ellipse(4);
+                Console.WriteLine($"Length: {shape.Length}");
+                Console.WriteLine($"Width: {shape.Width}");
+                Console.WriteLine($"Area: {shape.Area}");
+                Console.WriteLine($"Perimeter: {shape.Perimeter}");
+                Console.WriteLine($"ToString(R): {shape.ToString("R")}");
+                Console.WriteLine($"ToString(): {shape.ToString()}");
+                Console.WriteLine($"ToString(empty): {shape.ToString("")}");
+                Console.WriteLine($"ToString(null): {shape.ToString(null)}");
+                Console.WriteLine($"is3D: {shape.Is3D}");
             }
             catch (Exception ex)
             {

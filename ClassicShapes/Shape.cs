@@ -15,12 +15,8 @@ namespace ClassicShapes
         {
             get
             {
-                String[] shapes3D = { "Cuboid", "Cylinder", "Sphere" };
-                if (shapes3D.Contains(ShapeType.ToString()))
-                {
-                    return true;
-                }
-                else return false;
+                String[] are3D = { "Cuboid", "Cylinder", "Sphere" };
+                return are3D.Contains(ShapeType.ToString());
             }
         }
         public ShapeType ShapeType { get; private set; }

@@ -4,9 +4,7 @@ namespace ClassicShapes
     public class Rectangle : Shape2D
     {
         public Rectangle(double length, double width) : base(ShapeType.Rectangle, length, width)
-        {
-            // Empty ?
-        }
+        { }
 
         public override double Area
         {
