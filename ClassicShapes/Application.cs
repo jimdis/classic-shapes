@@ -16,7 +16,7 @@ namespace ClassicShapes
             {
                 // LÄGG IN INPUT FÖR ATT SLUMPA!
                 Console.WriteLine("Implementing Rectangle with length 2 & width 4");
-                Ellipse shape = new Ellipse(4);
+                Ellipse shape = new Ellipse(6, 9);
                 Console.WriteLine($"Length: {shape.Length}");
                 Console.WriteLine($"Width: {shape.Width}");
                 Console.WriteLine($"Area: {shape.Area}");
