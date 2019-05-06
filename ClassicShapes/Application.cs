@@ -16,16 +16,42 @@ namespace ClassicShapes
             {
                 // LÄGG IN INPUT FÖR ATT SLUMPA!
                 Console.WriteLine("Implementing Rectangle with length 2 & width 4");
-                Ellipse shape = new Ellipse(6, 9);
-                Console.WriteLine($"Length: {shape.Length}");
-                Console.WriteLine($"Width: {shape.Width}");
-                Console.WriteLine($"Area: {shape.Area}");
-                Console.WriteLine($"Perimeter: {shape.Perimeter}");
-                Console.WriteLine($"ToString(R): {shape.ToString("R")}");
-                Console.WriteLine($"ToString(): {shape.ToString()}");
-                Console.WriteLine($"ToString(empty): {shape.ToString("")}");
-                Console.WriteLine($"ToString(null): {shape.ToString(null)}");
-                Console.WriteLine($"is3D: {shape.Is3D}");
+                Rectangle shape2D = new Rectangle(2, 4);
+                Console.WriteLine($"Length: {shape2D.Length}");
+                Console.WriteLine($"Width: {shape2D.Width}");
+                Console.WriteLine($"Area: {shape2D.Area}");
+                Console.WriteLine($"Perimeter: {shape2D.Perimeter}");
+                Console.WriteLine($"ToString(R): {shape2D.ToString("R")}");
+                Console.WriteLine($"ToString(): {shape2D.ToString()}");
+                Console.WriteLine($"ToString(empty): {shape2D.ToString("")}");
+                Console.WriteLine($"ToString(null): {shape2D.ToString(null)}");
+                Console.WriteLine($"is3D: {shape2D.Is3D}");
+
+                Console.WriteLine("Implementing Cuboid with length 4, width 8, height 10");
+                Cuboid shape3D = new Cuboid(4, 8, 10);
+                Console.WriteLine($"Length: {shape3D.Length}");
+                Console.WriteLine($"Width: {shape3D.Width}");
+                Console.WriteLine($"Height: {shape3D.Height}");
+                Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
+                Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
+                Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
+                Console.WriteLine($"ToString(): {shape3D.ToString()}");
+                Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");
+                Console.WriteLine($"ToString(null): {shape3D.ToString(null)}");
+                Console.WriteLine($"is3D: {shape3D.Is3D}");
+                Console.WriteLine("Changing Width to 6");
+                shape3D.Width = 6;
+                Console.WriteLine($"Length: {shape3D.Length}");
+                Console.WriteLine($"Width: {shape3D.Width}");
+                Console.WriteLine($"Height: {shape3D.Height}");
+                Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
+                Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
+                Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
+                Console.WriteLine($"ToString(): {shape3D.ToString()}");
+                Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");
+                Console.WriteLine($"ToString(null): {shape3D.ToString(null)}");
+                Console.WriteLine($"is3D: {shape3D.Is3D}");
+
             }
             catch (Exception ex)
             {

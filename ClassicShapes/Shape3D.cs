@@ -26,6 +26,15 @@ namespace ClassicShapes
             }
         }
 
+        public double Length
+        {
+            get => _baseShape.Length;
+            set
+            {
+                _baseShape.Length = value;
+            }
+        }
+
         public virtual double MantelArea
         {
             get => _baseShape.Perimeter * Height;
@@ -34,6 +43,15 @@ namespace ClassicShapes
         public virtual double TotalSurfaceArea
         {
             get => MantelArea + 2 * _baseShape.Area;
+        }
+
+        public double Width
+        {
+            get => _baseShape.Width;
+            set
+            {
+                _baseShape.Width = value;
+            }
         }
 
         public virtual double Volume
