@@ -19,6 +19,7 @@ namespace ClassicShapes
                 return are3D.Contains(ShapeType.ToString());
             }
         }
+
         public ShapeType ShapeType { get; private set; }
 
         public abstract string ToString(string format);

@@ -6,7 +6,8 @@ namespace ClassicShapes
         protected Shape2D _baseShape;
         private double _height;
 
-        protected Shape3D(ShapeType shapeType, Shape2D baseShape, double height) : base(shapeType)
+        protected Shape3D(ShapeType shapeType, Shape2D baseShape, double height)
+            : base(shapeType)
         {
             _baseShape = baseShape;
             Height = height;
@@ -79,6 +80,5 @@ namespace ClassicShapes
                 throw new FormatException("format argument not accepted.");
             }
         }
-
     }
 }

@@ -6,7 +6,8 @@ namespace ClassicShapes
         private double _length;
         private double _width;
 
-        protected Shape2D(ShapeType shapeType, double length, double width) : base(shapeType)
+        protected Shape2D(ShapeType shapeType, double length, double width)
+            : base(shapeType)
         {
             Length = length;
             Width = width;
@@ -64,6 +65,5 @@ namespace ClassicShapes
                 throw new FormatException("format argument not accepted.");
             }
         }
-
     }
 }
