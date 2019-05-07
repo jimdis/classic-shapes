@@ -15,69 +15,35 @@ namespace ClassicShapes
             try
             {
                 Console.WriteLine("Välj typ av figur (\"2D\"/\"3D\"");
-                string figure = Console.ReadLine();
+                bool get3D = Console.ReadLine() == "3D";
                 Console.WriteLine("Hur många figurer ska slumpas fram? (antal)");
                 int numberOfFigures = int.Parse(Console.ReadLine());
 
-                Array values = Enum.GetValues(typeof(ShapeType));
+                Shape[] shapes = new Shape[numberOfFigures];
+
                 Random random = new Random();
+                Array shapeTypes = Enum.GetValues(typeof(ShapeType));
 
                 for (int i = 0; i < numberOfFigures; i++)
                 {
-                    ShapeType randomShape = (ShapeType)values.GetValue(random.Next(values.Length));
-                    // int shapeNumber = random.Next(ShapeType.GetNames(typeof(ShapeType)).Length);
-                    Console.WriteLine(randomShape);
+                    double[] measurements = new double[3];
+                    for (int j = 0; j < measurements.Length; j++)
+                    {
+                        measurements[j] = random.NextDouble() * 100 + 0.1;
+                    }
 
-                    // var shape = Activator.CreateInstance(Type.GetType(randomShape.ToString()));
+                    Shape shape;
+                    do
+                    {
+                        ShapeType shapetype = (ShapeType)shapeTypes.GetValue(random.Next(shapeTypes.Length));
+                        shape = GetRandomShape(shapetype, measurements);
+                    } while (shape.Is3D != get3D);
 
-                    // shape.
-                    // Console.WriteLine(shapeNumber);
-                    // Console.WriteLine((ShapeType)shapeNumber);
+                    shapes[i] = shape;
 
                 }
 
-                // LÄGG IN INPUT FÖR ATT SLUMPA!
-                // Console.WriteLine("Implementing Rectangle with length 2 & width 4");
-                // Rectangle shape2D = new Rectangle(2, 4);
-                // Console.WriteLine($"Length: {shape2D.Length}");
-                // Console.WriteLine($"Width: {shape2D.Width}");
-                // Console.WriteLine($"Area: {shape2D.Area}");
-                // Console.WriteLine($"Perimeter: {shape2D.Perimeter}");
-                // Console.WriteLine($"ToString(R): {shape2D.ToString("R")}");
-                // Console.WriteLine($"ToString(): {shape2D.ToString()}");
-                // Console.WriteLine($"ToString(empty): {shape2D.ToString("")}");
-                // Console.WriteLine($"ToString(null): {shape2D.ToString(null)}");
-                // Console.WriteLine($"is3D: {shape2D.Is3D}");
-
-                // Console.WriteLine("Implementing Sphere with Diameter 4");
-                // Sphere shape3D = new Sphere(4);
-                // Console.WriteLine($"Length: {shape3D.Length}");
-                // Console.WriteLine($"Width: {shape3D.Width}");
-                // Console.WriteLine($"Height: {shape3D.Height}");
-                // Console.WriteLine($"Diameter: {shape3D.Diameter}");
-                // Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
-                // Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
-                // Console.WriteLine($"Volume: {shape3D.Volume}");
-                // Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
-                // Console.WriteLine($"ToString(): {shape3D.ToString()}");
-                // Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");
-                // Console.WriteLine($"ToString(null): {shape3D.ToString(null)}");
-                // Console.WriteLine($"is3D: {shape3D.Is3D}");
-                // Console.WriteLine("Changing Width to 6");
-                // shape3D.Width = 6;
-                // Console.WriteLine($"Length: {shape3D.Length}");
-                // Console.WriteLine($"Width: {shape3D.Width}");
-                // Console.WriteLine($"Height: {shape3D.Height}");
-                // Console.WriteLine($"Diameter: {shape3D.Diameter}");
-                // Console.WriteLine($"MantelArea: {shape3D.MantelArea}");
-                // Console.WriteLine($"TotalSurfaceArea: {shape3D.TotalSurfaceArea}");
-                // Console.WriteLine($"Volume: {shape3D.Volume}");
-                // Console.WriteLine($"ToString(R): {shape3D.ToString("R")}");
-                // Console.WriteLine($"ToString(): {shape3D.ToString()}");
-                // Console.WriteLine($"ToString(empty): {shape3D.ToString("")}");
-                // Console.WriteLine($"ToString(null): {shape3D.ToString(null)}");
-                // Console.WriteLine($"is3D: {shape3D.Is3D}");
-
+                OutputShapes(shapes);
             }
             catch (Exception ex)
             {
@@ -86,36 +52,79 @@ namespace ClassicShapes
 
         }
 
+        private static Shape GetRandomShape(ShapeType shapetype, double[] measurements)
+        {
+            double w = measurements[0];
+            double l = measurements[1];
+            double h = measurements[2];
+
+            switch (shapetype)
+            {
+                case ShapeType.Rectangle: return new Rectangle(w, l);
+                case ShapeType.Ellipse: return new Ellipse(w, l);
+                case ShapeType.Cylinder: return new Cylinder(w, l, h);
+                case ShapeType.Cuboid: return new Cuboid(w, l, h);
+                case ShapeType.Sphere: return new Sphere(w);
+                default: return null;
+            }
+        }
+
         /// <summary>
         /// Prints out a table of descriptive statistics to the console.
         /// </summary>
         /// <param name="statistics">The dynamic object containing the descriptive statistics</param>
-        // private static void ViewResult(dynamic statistics)
-        // {
-        //     var dict = new Dictionary<string, string>
-        //         {
-        //             ["Maximum"] = $"{statistics.Maximum}",
-        //             ["Minimum"] = $"{statistics.Minimum}",
-        //             ["Medelvärde"] = $"{statistics.Mean:f1}",
-        //             ["Median"] = $"{statistics.Median}",
-        //             ["Typvärde"] = $"{string.Join(", ", statistics.Mode)}",
-        //             ["Variationsbredd"] = $"{statistics.Range}",
-        //             ["Standardavvikelse"] = $"{statistics.StandardDeviation:f1}"
+        private static void OutputShapes(Shape[] shapes)
+        {
+            Console.WriteLine("Skriv R för att visa resultat i rader. Annars tryck enter");
+            string format = Console.ReadLine();
+            if (format != "R") format = null;
 
-        //         };
-        //     int padding = dict
-        //         .Select(x => x.Key)
-        //         .OrderByDescending(x => x.Length)
-        //         .ToArray() [0].Length;
+            if (format == "R")
+            {
+                string[] headers = { "Length", "Width", "Perimeter", "Area" };
+                int padding = 15;
+                string align = "{0," + padding + ":f1}";
+                string output = $"{"Shape".PadRight(padding)}";
 
-        //     // Console.WriteLine("\n----------------------");
-        //     Console.WriteLine("\nDeskriptiv statistik");
-        //     Console.WriteLine("-------------------------");
-        //     foreach (KeyValuePair<string, string> kvp in dict)
-        //     {
-        //         Console.WriteLine($"{kvp.Key.PadRight(padding)}: {kvp.Value}");
-        //     }
-        //     Console.WriteLine("-------------------------\n");
-        // }
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    output += String.Format(align, headers[i]);
+                }
+                Console.WriteLine("--------------------------------------------------------------------------------");
+                Console.WriteLine(output);
+                Console.WriteLine("--------------------------------------------------------------------------------");
+            }
+            foreach (Shape shape in shapes)
+            {
+                Console.WriteLine(shape.ToString(format));
+            }
+            Console.WriteLine("--------------------------------------------------------------------------------");
+
+            //     var dict = new Dictionary<string, string>
+            //         {
+            //             ["Maximum"] = $"{statistics.Maximum}",
+            //             ["Minimum"] = $"{statistics.Minimum}",
+            //             ["Medelvärde"] = $"{statistics.Mean:f1}",
+            //             ["Median"] = $"{statistics.Median}",
+            //             ["Typvärde"] = $"{string.Join(", ", statistics.Mode)}",
+            //             ["Variationsbredd"] = $"{statistics.Range}",
+            //             ["Standardavvikelse"] = $"{statistics.StandardDeviation:f1}"
+
+            //         };
+            //     int padding = dict
+            //         .Select(x => x.Key)
+            //         .OrderByDescending(x => x.Length)
+            //         .ToArray() [0].Length;
+
+            //     // Console.WriteLine("\n----------------------");
+            //     Console.WriteLine("\nDeskriptiv statistik");
+            //     Console.WriteLine("-------------------------");
+            //     foreach (KeyValuePair<string, string> kvp in dict)
+            //     {
+            //         Console.WriteLine($"{kvp.Key.PadRight(padding)}: {kvp.Value}");
+            //     }
+            //     Console.WriteLine("-------------------------\n");
+            // }
+        }
     }
 }

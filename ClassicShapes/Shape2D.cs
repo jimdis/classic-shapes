@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 namespace ClassicShapes
 {
@@ -54,15 +53,16 @@ namespace ClassicShapes
 
         public override string ToString(string format)
         {
+            string[] keys = { "Length", "Width", "Perimeter", "Area" };
+            double[] values = { Length, Width, Perimeter, Area };
+            int max = (int)values.Max();
+            int maxLength = max.ToString().Length;
             if (format == "G" || String.IsNullOrEmpty(format))
             {
-                string[] keys = { "Längd", "Bredd", "Omkrets", "Area" };
-                double[] values = { Length, Width, Perimeter, Area };
-                int maxLength = (int)values.Max().ToString().Length;
                 int padding = maxLength < 10 ? 10 : maxLength;
                 string align = "{0,-" + padding + "} {1," + padding + ":f1}\n";
 
-                String output = $"\n{ShapeType}\n---------------\n";
+                string output = $"\n-----------------------\n{ShapeType}\n-----------------------\n";
 
                 for (int i = 0; i < keys.Length; i++)
                 {
@@ -73,7 +73,17 @@ namespace ClassicShapes
             }
             if (format == "R")
             {
-                return $"{ShapeType}\t{Length:f1}\t{Width:f1}\t{Perimeter:f1}\t{Area:f1}";
+                int padding = maxLength < 15 ? 15 : maxLength;
+                string align = "{0," + padding + ":f1}";
+                string output = $"{ShapeType.ToString().PadRight(padding)}";
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    output += String.Format(align, values[i]);
+                }
+                return output;
+
+                // return $"{ShapeType.ToString().PadRight(10)}\t{Length:f1}\t{Width:f1}\t{Perimeter:f1}\t{Area:f1}";
             }
             else
             {
