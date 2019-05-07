@@ -62,12 +62,14 @@ namespace ClassicShapes
                 int padding = maxLength < 10 ? 10 : maxLength;
                 string align = "{0,-" + padding + "} {1," + padding + ":f1}\n";
 
-                string output = $"\n-----------------------\n{ShapeType}\n-----------------------\n";
+                string output = $"\n---------------------\n{ShapeType}\n---------------------\n";
 
                 for (int i = 0; i < keys.Length; i++)
                 {
                     output += String.Format(align, $"{keys[i]}:", values[i]);
                 }
+
+                output += "---------------------";
 
                 return output;
             }
@@ -82,8 +84,6 @@ namespace ClassicShapes
                     output += String.Format(align, values[i]);
                 }
                 return output;
-
-                // return $"{ShapeType.ToString().PadRight(10)}\t{Length:f1}\t{Width:f1}\t{Perimeter:f1}\t{Area:f1}";
             }
             else
             {

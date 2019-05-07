@@ -14,10 +14,22 @@ namespace ClassicShapes
         {
             try
             {
-                Console.WriteLine("Välj typ av figur (\"2D\"/\"3D\"");
-                bool get3D = Console.ReadLine() == "3D";
-                Console.WriteLine("Hur många figurer ska slumpas fram? (antal)");
-                int numberOfFigures = int.Parse(Console.ReadLine());
+                string input;
+                do
+                {
+                    Console.Write("Choose your shape (\"2D\" or \"3D\"): ");
+                    input = Console.ReadLine();
+                } while (input != "3D" && input != "2D");
+
+                bool get3D = input == "3D";
+
+                int numberOfFigures;
+                do
+                {
+                    Console.Write("How many shapes should be generated? [1 - 100]: ");
+                } while (!(int.TryParse(Console.ReadLine(), out numberOfFigures) &&
+                         numberOfFigures >= 1 &&
+                         numberOfFigures <= 100));
 
                 Shape[] shapes = new Shape[numberOfFigures];
 
@@ -75,56 +87,33 @@ namespace ClassicShapes
         /// <param name="statistics">The dynamic object containing the descriptive statistics</param>
         private static void OutputShapes(Shape[] shapes)
         {
-            Console.WriteLine("Skriv R för att visa resultat i rader. Annars tryck enter");
-            string format = Console.ReadLine();
-            if (format != "R") format = null;
+            string format;
+            do
+            {
+                Console.Write("Type R to display shapes in rows. Type G or display shapes individually: ");
+                format = Console.ReadLine();
+            } while (format != "R" && format != "G");
 
             if (format == "R")
             {
                 string[] headers = { "Length", "Width", "Perimeter", "Area" };
                 int padding = 15;
                 string align = "{0," + padding + ":f1}";
-                string output = $"{"Shape".PadRight(padding)}";
+                string headerRow = $"{"Shape".PadRight(padding)}";
 
                 for (int i = 0; i < headers.Length; i++)
                 {
-                    output += String.Format(align, headers[i]);
+                    headerRow += String.Format(align, headers[i]);
                 }
                 Console.WriteLine("--------------------------------------------------------------------------------");
-                Console.WriteLine(output);
+                Console.WriteLine(headerRow);
                 Console.WriteLine("--------------------------------------------------------------------------------");
             }
             foreach (Shape shape in shapes)
             {
                 Console.WriteLine(shape.ToString(format));
             }
-            Console.WriteLine("--------------------------------------------------------------------------------");
-
-            //     var dict = new Dictionary<string, string>
-            //         {
-            //             ["Maximum"] = $"{statistics.Maximum}",
-            //             ["Minimum"] = $"{statistics.Minimum}",
-            //             ["Medelvärde"] = $"{statistics.Mean:f1}",
-            //             ["Median"] = $"{statistics.Median}",
-            //             ["Typvärde"] = $"{string.Join(", ", statistics.Mode)}",
-            //             ["Variationsbredd"] = $"{statistics.Range}",
-            //             ["Standardavvikelse"] = $"{statistics.StandardDeviation:f1}"
-
-            //         };
-            //     int padding = dict
-            //         .Select(x => x.Key)
-            //         .OrderByDescending(x => x.Length)
-            //         .ToArray() [0].Length;
-
-            //     // Console.WriteLine("\n----------------------");
-            //     Console.WriteLine("\nDeskriptiv statistik");
-            //     Console.WriteLine("-------------------------");
-            //     foreach (KeyValuePair<string, string> kvp in dict)
-            //     {
-            //         Console.WriteLine($"{kvp.Key.PadRight(padding)}: {kvp.Value}");
-            //     }
-            //     Console.WriteLine("-------------------------\n");
-            // }
+            if (format == "R") Console.WriteLine("--------------------------------------------------------------------------------");
         }
     }
 }
