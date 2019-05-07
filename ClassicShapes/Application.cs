@@ -94,26 +94,31 @@ namespace ClassicShapes
                 format = Console.ReadLine();
             } while (format != "R" && format != "G");
 
+            bool is3D = shapes[0].Is3D;
+            string separator = is3D ? "--------------------------------------------------------------------------------------------"
+                    : "-----------------------------------------------------";
+
             if (format == "R")
             {
-                string[] headers = { "Length", "Width", "Perimeter", "Area" };
-                int padding = 15;
-                string align = "{0," + padding + ":f1}";
-                string headerRow = $"{"Shape".PadRight(padding)}";
+                string[] headers2D = { "Length", "Width", "Perimeter", "Area" };
+                string[] headers3D = { "Length", "Width", "Height", "Mantel Area", "Total Surface Area", "Volume" };
 
-                for (int i = 0; i < headers.Length; i++)
+                int length = shapes[0].Is3D ? headers3D.Length : headers2D.Length;
+
+                string headerRow = $"{"Shape".PadRight(9)}";
+                for (int i = 0; i < length; i++)
                 {
-                    headerRow += String.Format(align, headers[i]);
+                    headerRow += String.Format("{0," + (is3D ? headers3D[i].Length + 5 : headers2D[i].Length + 5) + ":f1}", is3D ? headers3D[i] : headers2D[i]);
                 }
-                Console.WriteLine("--------------------------------------------------------------------------------");
+                Console.WriteLine(separator);
                 Console.WriteLine(headerRow);
-                Console.WriteLine("--------------------------------------------------------------------------------");
+                Console.WriteLine(separator);
             }
             foreach (Shape shape in shapes)
             {
                 Console.WriteLine(shape.ToString(format));
             }
-            if (format == "R") Console.WriteLine("--------------------------------------------------------------------------------");
+            if (format == "R") Console.WriteLine(separator);
         }
     }
 }

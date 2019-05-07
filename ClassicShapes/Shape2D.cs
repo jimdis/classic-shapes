@@ -55,11 +55,9 @@ namespace ClassicShapes
         {
             string[] keys = { "Length", "Width", "Perimeter", "Area" };
             double[] values = { Length, Width, Perimeter, Area };
-            int max = (int)values.Max();
-            int maxLength = max.ToString().Length;
             if (format == "G" || String.IsNullOrEmpty(format))
             {
-                int padding = maxLength < 10 ? 10 : maxLength;
+                int padding = 10;
                 string align = "{0,-" + padding + "} {1," + padding + ":f1}\n";
 
                 string output = $"\n---------------------\n{ShapeType}\n---------------------\n";
@@ -75,13 +73,11 @@ namespace ClassicShapes
             }
             if (format == "R")
             {
-                int padding = maxLength < 15 ? 15 : maxLength;
-                string align = "{0," + padding + ":f1}";
-                string output = $"{ShapeType.ToString().PadRight(padding)}";
+                string output = $"{ShapeType.ToString().PadRight(9)}";
 
                 for (int i = 0; i < keys.Length; i++)
                 {
-                    output += String.Format(align, values[i]);
+                    output += String.Format("{0," + (keys[i].Length + 5) + ":f1}", values[i]);
                 }
                 return output;
             }

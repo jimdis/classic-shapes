@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 namespace ClassicShapes
 {
     public abstract class Shape3D : Shape
@@ -82,13 +83,33 @@ namespace ClassicShapes
 
         public override string ToString(string format)
         {
+            string[] keys = { "Length", "Width", "Height", "Mantel Area", "Total Surface Area", "Volume" };
+            double[] values = { Length, Width, Height, MantelArea, TotalSurfaceArea, Volume };
             if (format == "G" || String.IsNullOrEmpty(format))
             {
-                return "Formaterar med G";
+                int keyPadding = 20;
+                int valuePadding = 8;
+
+                string output = $"\n---------------------\n{ShapeType}\n---------------------\n";
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    output += String.Format("{0,-" + keyPadding + "} {1," + valuePadding + ":f1}\n", $"{keys[i]}:", values[i]);
+                }
+
+                output += "---------------------";
+
+                return output;
             }
             if (format == "R")
             {
-                return "Formaterar med R";
+                string output = $"{ShapeType.ToString().PadRight(9)}";
+
+                for (int i = 0; i < keys.Length; i++)
+                {
+                    output += String.Format("{0," + (keys[i].Length + 5) + ":f1}", values[i]);
+                }
+                return output;
             }
             else
             {
