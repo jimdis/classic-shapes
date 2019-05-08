@@ -1,12 +1,20 @@
 using System;
-using System.Linq;
 namespace ClassicShapes
 {
+    /// <summary>
+    /// Represents a 3D Shape.
+    /// </summary>
     public abstract class Shape3D : Shape
     {
         protected Shape2D _baseShape;
         private double _height;
 
+        /// <summary>
+        ///     Constructor for the Shape3D class.
+        /// </summary>
+        /// <param name="shapeType">The ShapeType of the 3D shape.</param>
+        /// <param name="baseShape">The Shape2D on which the 3D shape is built.</param>
+        /// <param name="height">The height of the 3D shape.</param>
         protected Shape3D(ShapeType shapeType, Shape2D baseShape, double height)
             : base(shapeType)
         {
@@ -14,6 +22,10 @@ namespace ClassicShapes
             Height = height;
         }
 
+        /// <summary>
+        ///     Gets and sets the Height of the 3D shape.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if Height is set to <= 0.</exception>
         public double Height
         {
             get => _height;
@@ -33,6 +45,10 @@ namespace ClassicShapes
             }
         }
 
+        /// <summary>
+        ///     Gets and sets the Length of the 3D shape.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if Length is set to <= 0.</exception>
         public double Length
         {
             get => _baseShape.Length;
@@ -46,7 +62,9 @@ namespace ClassicShapes
                 }
             }
         }
-
+        /// <summary>
+        ///     Gets the Mantel Area of the 3D shape.
+        /// </summary>
         public virtual double MantelArea
         {
             get => _baseShape.Perimeter * Height;
@@ -57,6 +75,10 @@ namespace ClassicShapes
             get => MantelArea + 2 * _baseShape.Area;
         }
 
+        /// <summary>
+        ///     Gets and sets the Width of the 3D shape.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if Width is set to <= 0.</exception>
         public double Width
         {
             get => _baseShape.Width;
@@ -71,16 +93,41 @@ namespace ClassicShapes
             }
         }
 
+        /// <summary>
+        ///     Gets the Volume of the 3D shape.
+        /// </summary>
         public virtual double Volume
         {
             get => _baseShape.Area * Height;
         }
 
+        /// <summary>
+        ///     Converts this 3D shape to a human-readable string with a new line for each property of the 3D shape.
+        /// </summary>
         public override string ToString()
         {
             return ToString("G");
         }
 
+        /// <summary>
+        ///     Converts this 3D shape to a human-readable string using specified format.
+        /// </summary>
+        /// <param name="format">A standard format string (see Remarks).</param>
+        /// <returns>A string representation of this 3D shape.</returns>
+        /// <remarks>
+        ///     The ToString(String) method returns the string representation of a 3D shape in a specific
+        ///     format.
+        ///     The format parameter should contain a single format specifier character that defines the format of the returned
+        ///     string. If format is null or an empty string, the format specifier, 'G', is used.
+        ///     <list type="bullet">
+        ///         <item>
+        ///             "G" format specifier: Returns a string with a new line for each property of the 3D shape.
+        ///         </item>
+        ///         <item>
+        ///             "R" format specifier: Returns a string with all properties of the 3D shape on a single line.
+        ///         </item>
+        ///     </list>
+        /// </remarks>
         public override string ToString(string format)
         {
             string[] keys = { "Length", "Width", "Height", "Mantel Area", "Total Surface Area", "Volume" };

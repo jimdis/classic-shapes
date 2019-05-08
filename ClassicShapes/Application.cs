@@ -43,6 +43,12 @@ namespace ClassicShapes
 
         }
 
+        /// <summary>
+        /// Returns an Array of sorted Shapes based on argument list.
+        /// </summary>
+        /// <param name="get3D">True if the returned Shapes should be 3D shapes.</param>
+        /// <param name="numberOfShapes">Number of Shapes to include in the returned Array.</param>
+        /// <returns>An Array of sorted Shapes.</returns>
         private static Shape[] GetShapes(bool get3D, int numberOfShapes)
         {
             Random random = new Random();
@@ -103,6 +109,7 @@ namespace ClassicShapes
             }
 
             Shape[] shapes = new Shape[numberOfShapes];
+
             if (get3D)
             {
                 shapes = shapes3D
@@ -119,13 +126,12 @@ namespace ClassicShapes
             }
 
             return shapes;
-
         }
 
         /// <summary>
-        /// Prints out a table of descriptive statistics to the console.
+        /// Prints out data about the Shapes to the console based on user input.
         /// </summary>
-        /// <param name="statistics">The dynamic object containing the descriptive statistics</param>
+        /// <param name="shapes">An array of Shapes</param>
         private static void OutputShapes(Shape[] shapes)
         {
             string format;
