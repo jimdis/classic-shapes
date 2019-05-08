@@ -36,12 +36,10 @@ namespace ClassicShapes
                 {
                     throw new ArgumentOutOfRangeException("Height must be greater than zero.");
                 }
+
                 _height = value;
-                if (ShapeType == ShapeType.Sphere)
-                {
-                    _baseShape.Length = value;
-                    _baseShape.Width = value;
-                }
+
+                if (ShapeType == ShapeType.Sphere) _baseShape.Length = _baseShape.Width = value;
             }
         }
 
@@ -57,8 +55,7 @@ namespace ClassicShapes
                 _baseShape.Length = value;
                 if (ShapeType == ShapeType.Sphere)
                 {
-                    _baseShape.Width = value;
-                    Height = value;
+                    _baseShape.Width = Height = value;
                 }
             }
         }
@@ -70,6 +67,9 @@ namespace ClassicShapes
             get => _baseShape.Perimeter * Height;
         }
 
+        /// <summary>
+        ///     Gets the Total Surface Area of the 3D shape.
+        /// </summary>
         public virtual double TotalSurfaceArea
         {
             get => MantelArea + 2 * _baseShape.Area;
@@ -87,8 +87,7 @@ namespace ClassicShapes
                 _baseShape.Width = value;
                 if (ShapeType == ShapeType.Sphere)
                 {
-                    _baseShape.Length = value;
-                    Height = value;
+                    _baseShape.Length = Height = value;
                 }
             }
         }
@@ -104,10 +103,8 @@ namespace ClassicShapes
         /// <summary>
         ///     Converts this 3D shape to a human-readable string with a new line for each property of the 3D shape.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString("G");
-        }
+        /// <returns>A string representation of this 3D shape.</returns>
+        public override string ToString() => ToString("G");
 
         /// <summary>
         ///     Converts this 3D shape to a human-readable string using specified format.

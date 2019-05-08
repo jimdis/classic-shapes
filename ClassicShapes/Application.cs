@@ -52,58 +52,51 @@ namespace ClassicShapes
         private static Shape[] GetShapes(bool get3D, int numberOfShapes)
         {
             Random random = new Random();
-            Array shapeTypes = Enum.GetValues(typeof(ShapeType));
+            ShapeType[] shapeTypes3D = { ShapeType.Cuboid, ShapeType.Cylinder, ShapeType.Sphere };
+            ShapeType[] shapeTypes2D = { ShapeType.Ellipse, ShapeType.Rectangle };
+
+
             Shape2D[] shapes2D = new Shape2D[numberOfShapes];
             Shape3D[] shapes3D = new Shape3D[numberOfShapes];
 
             for (int i = 0; i < numberOfShapes; i++)
             {
-                double[] measurements = new double[3];
-                for (int j = 0; j < measurements.Length; j++)
-                {
-                    measurements[j] = random.NextDouble() * 100 + 0.1;
-                }
-                double w = measurements[0];
-                double l = measurements[1];
-                double h = measurements[2];
+                double w = random.NextDouble() * 100 + 0.1;
+                double l = random.NextDouble() * 100 + 0.1;
+                double h = random.NextDouble() * 100 + 0.1;
 
                 Shape2D shape2D = null;
                 Shape3D shape3D = null;
+
                 if (get3D)
                 {
-                    do
+                    ShapeType shapeType = shapeTypes3D[random.Next(shapeTypes3D.Length)];
+                    switch (shapeType)
                     {
-                        ShapeType shapeType = (ShapeType)shapeTypes.GetValue(random.Next(shapeTypes.Length));
-                        switch (shapeType)
-                        {
-                            case ShapeType.Cylinder:
-                                shape3D = new Cylinder(w, l, h);
-                                break;
-                            case ShapeType.Cuboid:
-                                shape3D = new Cuboid(w, l, h);
-                                break;
-                            case ShapeType.Sphere:
-                                shape3D = new Sphere(w);
-                                break;
-                        }
-                    } while (shape3D == null);
+                        case ShapeType.Cylinder:
+                            shape3D = new Cylinder(w, l, h);
+                            break;
+                        case ShapeType.Cuboid:
+                            shape3D = new Cuboid(w, l, h);
+                            break;
+                        case ShapeType.Sphere:
+                            shape3D = new Sphere(w);
+                            break;
+                    }
                     shapes3D[i] = shape3D;
                 }
                 else
                 {
-                    do
+                    ShapeType shapeType = shapeTypes2D[random.Next(shapeTypes2D.Length)];
+                    switch (shapeType)
                     {
-                        ShapeType shapeType = (ShapeType)shapeTypes.GetValue(random.Next(shapeTypes.Length));
-                        switch (shapeType)
-                        {
-                            case ShapeType.Rectangle:
-                                shape2D = new Rectangle(w, l);
-                                break;
-                            case ShapeType.Ellipse:
-                                shape2D = new Ellipse(w, l);
-                                break;
-                        }
-                    } while (shape2D == null);
+                        case ShapeType.Rectangle:
+                            shape2D = new Rectangle(w, l);
+                            break;
+                        case ShapeType.Ellipse:
+                            shape2D = new Ellipse(w, l);
+                            break;
+                    }
                     shapes2D[i] = shape2D;
                 }
             }

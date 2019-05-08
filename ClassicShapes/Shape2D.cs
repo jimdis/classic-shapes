@@ -71,10 +71,8 @@ namespace ClassicShapes
         /// <summary>
         ///     Converts this 2D shape to a human-readable string with a new line for each property of the 2D shape.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString("G");
-        }
+        /// <returns>A string representation of this 2D shape.</returns>
+        public override string ToString() => ToString("G");
 
         /// <summary>
         ///     Converts this 2D shape to a human-readable string using specified format.
